@@ -4,16 +4,16 @@ type PageParams = {
 }
 
 const page = ({ params }: { params: PageParams }) => {
-    console.log({params})
+    console.log({ params })
     return (
         <div>
-            {params.catch.map((value) => {
+            {params.catch ? params.catch.map((value) => {
                 return (
                     <span className='mr-2'>
                         {value}
                     </span>
                 )
-            })}
+            }): <span>not found params</span>}
         </div>
     );
 };
