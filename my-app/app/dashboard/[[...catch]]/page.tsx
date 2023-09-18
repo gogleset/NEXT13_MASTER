@@ -5,6 +5,7 @@ type PageParams = {
 
 const page = ({ params }: { params: PageParams }) => {
     console.log({ params })
+
     return (
         <div>
             {params.catch ? params.catch.map((value) => {
