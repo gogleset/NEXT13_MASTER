@@ -6,10 +6,13 @@ export async function GET(request: NextRequest) {
   console.info("httpHeaders: ", httpHeaders)
   console.info("request.headers: ", request.headers)
   const url = "https://jsonplaceholder.typicode.com"
-  const res = await fetch(`${url}/posts`, { next: { revalidate: 60 } })
+  const res = await fetch(`${url}/posts`);
   const result = await res.json()
 
-  return NextResponse.json({ result })
+  return NextResponse.json({
+    result,
+    
+  })
 }
 
 export async function POST(request: NextRequest) {

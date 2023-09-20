@@ -5,17 +5,24 @@ import type { NextRequest } from "next/server"
 export function middleware(request: NextRequest) {
   console.log("middleware")
 
-  // proxy
   if (request.nextUrl.pathname.startsWith("/dashboard")) {
     console.log(request.url, "middleware, /dashboard")
     // Router로 넘기기 가능(중간다리 middleware이기 때문)
-    const response = NextResponse.next()
+    const newHeader = new Headers(request.headers)
+    newHeader.set("some-thing-header", "something from header")
+    newHeader.set("request-time", new Date().getTime().toString())
+
+    // Router로 넘기기 가능(중간다리 middleware이기 때문)
+    const response = NextResponse.next({
+      request: {
+        headers: newHeader,
+      },
+    })
     response.cookies.set({
       name: "foo",
       value: "true",
       path: "/",
     })
-
     return response
   }
 
